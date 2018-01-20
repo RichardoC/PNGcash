@@ -1,7 +1,4 @@
-FROM ethereum/client-go
-
-# Standard
-EXPOSE 30303
+FROM harshjv/testrpc
 
 # JSON-RPC
 EXPOSE 8545
