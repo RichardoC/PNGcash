@@ -9,6 +9,8 @@ def sms_reply():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
     body = request.values.get('Body', None)
+    if body == None:
+        body = 'error'
 
     # Start our TwiML response
     resp = MessagingResponse()
@@ -18,6 +20,8 @@ def sms_reply():
         resp.message("Hi!")
     elif body == 'bye':
         resp.message("Goodbye")
+    elif body = 'error':
+        resp.message("You said nothing")
     else:
         resp.message("another thing")
 
