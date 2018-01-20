@@ -9,6 +9,7 @@ def sms_reply():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
     body = request.values.get('Body', None)
+    print(body)
     if body == None:
         body = 'error'
 
