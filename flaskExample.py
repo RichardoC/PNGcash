@@ -6,15 +6,18 @@ app = Flask(__name__)
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
-    """Respond to incoming calls with a MMS message."""
+    """Send a dynamic reply to an incoming text message"""
+    # Get the message the user sent our Twilio number
+    body = request.values.get('Body', None)
+
     # Start our TwiML response
     resp = MessagingResponse()
 
-    # Add a text message
-    msg = resp.message("The Robots are coming! Head for the hills!")
-
-    # Add a picture message
-    msg.media("https://farm8.staticflickr.com/7090/6941316406_80b4d6d50e_z_d.jpg")
+    # Determine the right reply for this message
+    if body == 'hello':
+        resp.message("Hi!")
+    elif body == 'bye':
+        resp.message("Goodbye")
 
     return str(resp)
 
