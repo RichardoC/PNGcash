@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: eth
+  name: eth
+  namespace: default
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/eth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: eth
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: eth
+    spec:
+      containers:
+      - image: richardoc/pngcash:eth
+        imagePullPolicy: Always
+        name: eth
+        ports:
+        - containerPort: 8545
+          protocol: TCP
+        - containerPort: 30303
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+
