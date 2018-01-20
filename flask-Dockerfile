@@ -6,5 +6,5 @@ RUN pip install flask twilio
 
 EXPOSE 5000
 
-ENTRYPOINT ["FLASK_APP=/flaskExample.py", "flask", "run"]
+ENTRYPOINT ["pypy3", "/flaskExample.py"]
 
