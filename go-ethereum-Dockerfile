@@ -1,0 +1,9 @@
+FROM ethereum/client-go
+
+# Standard
+EXPOSE 30303
+
+# JSON-RPC
+EXPOSE 8545
+
+ENTRYPOINT ["/geth", "--rpc", "--rpcaddr", '"0.0.0.0"']
