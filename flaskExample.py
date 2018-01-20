@@ -28,5 +28,9 @@ def sms_reply():
 
     return str(resp)
 
+@app.route("/")
+def hello():
+    return "Default Hello World!"
+
 if __name__ == "__main__":
     app.run(debug=True)
