@@ -20,7 +20,7 @@ def sms_reply():
         resp.message("Hi!")
     elif body == 'bye':
         resp.message("Goodbye")
-    elif body = 'error':
+    elif body == 'error':
         resp.message("You said nothing")
     else:
         resp.message("another thing")
