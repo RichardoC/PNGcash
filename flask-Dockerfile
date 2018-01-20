@@ -1,10 +1,9 @@
 FROM pypy:3
 
-COPY flaskExample.py /
-
 RUN pip install flask twilio
 
 EXPOSE 5000
 
-ENTRYPOINT ["pypy3", "/flaskExample.py"]
+COPY flaskExample.py /
 
+ENTRYPOINT ["pypy3", "/flaskExample.py"]
