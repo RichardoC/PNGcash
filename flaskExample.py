@@ -8,6 +8,8 @@ app = Flask(__name__)
 def sms_reply():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
+    print(request)
+    print(request.values)
     body = request.values.get('Body', None)
     print(body)
     if body == None:
@@ -26,8 +28,8 @@ def sms_reply():
     elif body.split(' ')[0] == 'send' or body.split(' ')[0] == 'Send':
         b = body.split(' ')
         v = b[1]
-        p = b[0]
-        s = 'You are now sending {0}: {1}$PNG'.format(v, p)
+        p = b[2]
+        s = 'You are now sending {0}: $PNG {1}'.format(v, p)
         resp.message(s)
     else:
         resp.message("another thing")
