@@ -23,6 +23,12 @@ def sms_reply():
         resp.message("Goodbye")
     elif body == 'error':
         resp.message("You said nothing")
+    elif body.split(' ')[0] == 'send' or body.split(' ')[0] == 'Send':
+        b = body.split(' ')
+        v = b[1]
+        p = b[0]
+        s = 'You are now sending {0}: {1}$PNG'.format(v, p)
+        resp.message(s)
     else:
         resp.message("another thing")
 
@@ -33,4 +39,4 @@ def hello():
     return "Default Hello World!"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='http://0.0.0.0:5000/')
