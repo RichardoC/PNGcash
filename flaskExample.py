@@ -14,35 +14,47 @@ def sms_reply():
     body = request.values.get('Body', None)
     print(body)
     if body == None:
-        body = 'error'
+        body = 'Error'
 
     # Start our TwiML response
     resp = MessagingResponse()
-
     parts = body.split()
 
     # Determine the right reply for this message
-    if body == 'hello':
-        resp.message("Hi!")
-    elif len(parts) == 3:
-        #do transfer
-        #send back success/failure
+    if len(parts) == 3:
+        fromID = parts[0]
+        toID = parts[1]
+        amount = parts[2]
+        ledger.transfer(fromID, toID, amount)
+        try:
+            ledger.transfer(fromID, toID, amount)
+            m = '{0} -> {1} -> ${2}'.format(fromID,
+                                            toID,
+                                            amount)
+        except:
+            m = ':('
+        resp.message(m)
+    elif len(parts) == 4:
+        m = 'Error'
+        if parts[1] == '->':
+            fromID = parts[0]
+            toID = parts[2]
+            amount = parts[3]
+            try:
+                ledger.transfer(fromID, toID, amount)
+                m = '{0} -> {1} -> ${2}'.format(fromID,
+                                                toID,
+                                                amount)
+            except:
+                m = ':('
+        resp.message(m)
     elif len(parts) == 1:
         #try balance
         #send back balance
-    elif body == 'bye':
-        resp.message("Goodbye")
-    elif body == 'error':
-        resp.message("You said nothing")
-    elif body.split(' ')[0] == 'send' or body.split(' ')[0] == 'Send':
-        b = body.split(' ')
-        v = b[1]
-        p = b[2]
-        s = 'You are now sending {0}: $PNG {1}'.format(v, p)
-        resp.message(s)
+        bal = ledger.balance(parts)
+        resp.message(bal)
     else:
-        resp.message("another thing")
-
+        resp.message("Error")
     return str(resp)
 
 @app.route("/")
