@@ -28,8 +28,8 @@ def sms_reply():
         status = ledger.transfer(fromID, toID, amount)
         if status:
             m = ':) \n{0} -> {1} -> ${2}'.format(fromID,
-                                                  toID,
-                                                  amount)
+                                                 toID,
+                                                 amount)
         else:
             m = ':('
         resp.message(m)
@@ -41,7 +41,7 @@ def sms_reply():
            amount = parts[3]
            status = ledger.transfer(fromID, toID, amount)
            if status:
-                m = '{0} -> {1} -> ${2}'.format(fromID,
+               m = '{0} -> {1} -> ${2}'.format(fromID,
                                                 toID,
                                                 amount)
            else:
