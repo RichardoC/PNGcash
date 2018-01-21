@@ -273,10 +273,18 @@ contract_address = tx_receipt['contractAddress']
 # Contract instance in concise mode
 contract_instance = w3.eth.contract(contract_interface['abi'], contract_address, ContractFactoryClass=ConciseContract)
 
-print(contract_interface['abi'], contract_address)
 
-# Getters + Setters for web3.eth.contract object
-# print('Contract value: {}'.format(contract_instance.greet()))
-# contract_instance.setGreeting('Nihao', transact={'from': w3.eth.accounts[0]})
-# print('Setting value to: Nihao')
-# print('Contract value: {}'.format(contract_instance.greet()))
+
+def balance(accountID):
+    balance = contract_instance.balanceOf(w3.eth.accounts[accountID])
+    print(accountID,  " balance: ",  balance)
+    return balance
+
+def transfer(fromID, toID, amount):
+    orgBal = balance(fromID)
+    contract_instance.transfer(w3.eth.accounts[toID], amount, transact={"from":w3.eth.accounts[fromID]})
+    newBal = balance(fromID)
+    if orgBal == newBal and amount > 0:
+        return True
+    else:
+        return False
