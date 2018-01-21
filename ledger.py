@@ -284,7 +284,7 @@ def transfer(fromID, toID, amount):
     orgBal = balance(fromID)
     contract_instance.transfer(w3.eth.accounts[toID], amount, transact={"from":w3.eth.accounts[fromID]})
     newBal = balance(fromID)
-    if orgBal == newBal and amount > 0:
+    if orgBal != newBal and amount > 0:
         return True
     else:
         return False
