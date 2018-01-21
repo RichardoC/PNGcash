@@ -27,11 +27,12 @@ def sms_reply():
         amount = parts[2]
         status = ledger.transfer(fromID, toID, amount)
         if status:
-            m = ':)'
+            m = ':) \n{0} -> {1} -> ${2}'.format(fromID,
+                                                  toID,
+                                                  amount)
         else:
             m = ':('
         resp.message(m)
-    
     elif len(parts) == 4:
         m = 'Error'
         if parts[1] == '->':
@@ -41,20 +42,17 @@ def sms_reply():
            status = ledger.transfer(fromID, toID, amount)
            if status:
                 m = '{0} -> {1} -> ${2}'.format(fromID,
-                                               toID,
-                                               amount)
+                                                toID,
+                                                amount)
            else:
                m = ':('
            resp.message(m)
-
     elif len(parts) == 1:
-        #try balance
-        #send back balance
+        # Check balance
         bal = ledger.balance(parts)
         resp.message(bal)
     else:
         resp.message("Error")
-    
     return str(resp)
 
 @app.route("/")
