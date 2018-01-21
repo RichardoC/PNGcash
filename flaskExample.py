@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
+import ledger
 
 app = Flask(__name__)
 
@@ -18,9 +19,17 @@ def sms_reply():
     # Start our TwiML response
     resp = MessagingResponse()
 
+    parts = body.split()
+
     # Determine the right reply for this message
     if body == 'hello':
         resp.message("Hi!")
+    elif len(parts) == 3:
+        #do transfer
+        #send back success/failure
+    elif len(parts) == 1:
+        #try balance
+        #send back balance
     elif body == 'bye':
         resp.message("Goodbye")
     elif body == 'error':

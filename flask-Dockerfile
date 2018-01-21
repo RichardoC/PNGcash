@@ -1,9 +1,11 @@
 FROM pypy:3
 
-RUN pip install flask twilio
+RUN pip install flask twilio web3 py-solc
 
 EXPOSE 5000
 
-COPY flaskExample.py /
+COPY flaskExample.py ledger.py  /
+
+
 
 ENTRYPOINT ["pypy3", "/flaskExample.py"]

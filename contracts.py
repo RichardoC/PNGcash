@@ -7,7 +7,7 @@ def findContract():
   contract_instance = w3.eth.contract(abi, address, ContractFactoryClass=ConciseContract)
   return contract_instance
 
-w3 = Web3(HTTPProvider("http://localhost:8545"))
+w3 = Web3(HTTPProvider("http://10.11.245.19:8545"))
 contract = findContract()
 contract.transfer(w3.eth.accounts[1], 100, transact={'from':w3.eth.accounts[0]})
 print(contract.balanceOf[w3.eth.accounts[1]])
