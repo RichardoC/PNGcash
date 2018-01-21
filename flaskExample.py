@@ -43,7 +43,7 @@ def sms_reply():
                 m = '{0} -> {1} -> ${2}'.format(fromID,
                                                toID,
                                                amount)
-            else:
+           else:
                m = ':('
            resp.message(m)
 
