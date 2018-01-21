@@ -50,7 +50,7 @@ def sms_reply():
     elif len(parts) == 1:
         # Check balance
         bal = ledger.balance(int(parts[0]))
-        resp.message(bal)
+        resp.message(str(bal))
     else:
         resp.message("Error")
     return str(resp)
