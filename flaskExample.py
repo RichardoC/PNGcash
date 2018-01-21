@@ -46,7 +46,7 @@ def sms_reply():
                                                 amount)
            else:
                m = ':('
-           resp.message(m)
+        resp.message(m)
     elif len(parts) == 1:
         # Check balance
         bal = ledger.balance(int(parts[0]))
